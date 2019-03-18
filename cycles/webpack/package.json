@@ -1,0 +1,17 @@
+{
+  "name": "cycle-depend-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "http-server",
+    "build": "webpack --config webpack.config.js"
+  },
+  "author": "cenjw",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  }
+}

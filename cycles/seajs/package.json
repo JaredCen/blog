@@ -1,0 +1,14 @@
+{
+  "name": "seajs-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "a.js",
+  "scripts": {
+    "serve": "http-server"
+  },
+  "author": "Junrey",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
