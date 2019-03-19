@@ -1,7 +1,7 @@
 import b from './b.mjs';
 console.log('a starting');
-console.log('in a, b.done = %j', b.done);
-export default {
-  done: true,
+console.log(b());
+export default function () {
+  return 'run func A';
 }
 console.log('a done');

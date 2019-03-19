@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   mode: 'production',
   entry: {
-    cjs: './commonjs/app.js',
+    cjs: './cjs/app.js',
     esm: './esm/app.js',
   },
   output: {

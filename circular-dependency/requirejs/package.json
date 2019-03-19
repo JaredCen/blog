@@ -1,5 +1,5 @@
 {
-  "name": "requirejs-demo",
+  "name": "circular-dependency-requirejs-demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

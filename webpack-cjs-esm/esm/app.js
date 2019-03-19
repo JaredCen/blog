@@ -1,6 +1,7 @@
 console.log('app starting');
-
+export default {
+  done: true,
+}
 import a from './a';
-import b from './b';
-
-console.log('in app', a.done, b.done);
+console.log('in app, a.done =', a.done);
+console.log('app done');

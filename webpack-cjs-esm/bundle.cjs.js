@@ -81,42 +81,31 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */,
-/* 1 */,
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-console.log('a starting');
-// exports.done = false;
-const b = __webpack_require__(3);
-console.log('in a, b.done =', b.done);
-exports.done = true;
-console.log('a done');
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-console.log('b starting');
-// exports.done = false;
-const a = __webpack_require__(2);
-console.log('in b, a.done =', a.done);
-exports.done = true;
-console.log('b done');
-
-/***/ }),
-/* 4 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 console.log('app starting');
-const a = __webpack_require__(2);
-const b = __webpack_require__(3);
-console.log('in app', a.done, b.done);
+const a = __webpack_require__(3);
+console.log('in app, a.done =', a.done);
+exports.done = true;
+console.log('app done');
 
+
+/***/ }),
+/* 2 */,
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+console.log('a starting');
+const app = __webpack_require__(1);
+console.log('in a, app.done =', app.done);
+exports.done = true;
+console.log('a done');
 
 /***/ })
 /******/ ]);

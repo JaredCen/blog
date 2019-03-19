@@ -1,5 +1,5 @@
 {
-  "name": "seajs-demo",
+  "name": "circular-dependency-seajs-demo",
   "version": "1.0.0",
   "description": "",
   "main": "a.js",

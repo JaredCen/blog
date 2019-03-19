@@ -1,7 +1,5 @@
 console.log('a starting');
-export default {
-  done: true,
-}
-import app from './app';
+const app = require('./app');
 console.log('in a, app.done =', app.done);
+exports.done = true;
 console.log('a done');

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -89,46 +89,30 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _b__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-console.log('a starting');
-
-console.log('in a, b.done =', _b__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].done);
-/* harmony default export */ __webpack_exports__["a"] = ({
-  done: true,
-});
-console.log('a done');
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
-console.log('b starting');
-
-console.log('in b, a.done =', _a__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].done);
-/* harmony default export */ __webpack_exports__["a"] = ({
-  done: true,
-});
-console.log('b done');
-
-/***/ }),
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
-/* harmony import */ var _b__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 console.log('app starting');
+/* harmony default export */ __webpack_exports__["default"] = ({
+  done: true,
+});
 
+console.log('in app, a.done =', _a__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].done);
+console.log('app done');
 
+/***/ }),
+/* 1 */,
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+console.log('a starting');
+/* harmony default export */ __webpack_exports__["a"] = ({
+  done: true,
+});
 
-console.log('in app', _a__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].done, _b__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].done);
+console.log('in a, app.done =', _app__WEBPACK_IMPORTED_MODULE_0__["default"].done);
+console.log('a done');
 
 /***/ })
 /******/ ]);
