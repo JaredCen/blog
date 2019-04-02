@@ -7,7 +7,7 @@ function Calculate(options = {}) {
     '/': 2,
   };
   // 小数位精度
-  this.decimal = options.decimal || 2;
+  this.precision = options.precision || 2;
   this.operatorStack = [];    // 运算符栈
   this.outputQueue = [];      // 逆波兰表达式队列
 }
@@ -18,7 +18,7 @@ Calculate.prototype = {
    * @desc 四则运算，浮点数处理
    */
   operate(left, right, operator) {
-    const factor = '1000000000000'.slice(0, this.decimal + 1) - 0;
+    const factor = +'1000000000000'.slice(0, this.precision + 1);
     if (operator === '+') {
       return Math.round(left * factor + right * factor) / factor;
     } else if (operator === '-') {
