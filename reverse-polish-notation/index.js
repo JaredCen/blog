@@ -24,7 +24,7 @@ Calculate.prototype = {
     } else if (operator === '-') {
       return Math.round(left * factor - right * factor) / factor;
     } else if (operator === '*') {
-      return Math.round(left * factor * right * factor) / Math.pow(factor, 2);
+      return Math.round(left * right * factor) / factor;
     } else if (operator === '/') {
       return Math.round(left / right * factor) / factor;
     }
@@ -89,16 +89,17 @@ Calculate.prototype = {
 
     let chars;
     const str = this.preValid(expStr);
-    const reg = /([\d\.]+|[\(\)\+\-\*\/])/g;
+    const reg = /(((?<!\d)-)?\d+(\.\d+)?|[\(\)\+\-\*\/])/g;
     while ((chars = reg.exec(str)) !== null) {
       this.shuntingYard(chars[0]);
     }
     while (this.operatorStack.length) {
       this.outputQueue.push(this.operatorStack.pop());
     }
+    console.log(this.outputQueue);
     return this.calRpn()
   }
 }
 
 const cal = new Calculate();
-cal.run('1-(2+3*8)');
+cal.run('1-(-2.333+3*-8)');
