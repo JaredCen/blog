@@ -1,0 +1,155 @@
+<html>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+  <head>
+    <style>
+      ul {
+        list-style: none;
+      }
+      .swipe {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 40px auto;
+        width: 90%;
+        max-width: 375px;
+        height: 200px;
+        overflow: hidden;
+      }
+      .swipe-group {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .swipe-item {
+        flex: 0 0 100%;
+        height: 100%;
+        line-height: 200px;
+        text-align: center;
+        font-size: 40px;
+        font-weight: 600;
+        color: #fff;
+      }
+      .swipe-item:nth-child(1) {
+        background-color: aquamarine;
+      }
+      .swipe-item:nth-child(2) {
+        background-color: chocolate;
+      }
+      .swipe-item:nth-child(3) {
+        background-color: darksalmon;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="tpl">
+      <div class="swipe">
+        <ul class="swipe-group"
+          :style="groupStyle">
+          <li 
+            class="swipe-item" 
+            v-for="item in items"
+            ref="item">
+            {{item}}
+          </li>
+        </ul>
+      </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        template: '#tpl',
+        computed: {
+          groupStyle() {
+            return {
+              'transform': `translate3d(${this.offset}px, 0, 0)`,
+              'transition-duration': `${this.duration}ms`,
+            };
+          },
+        },
+        data() {
+          return {
+            items: [1, 2, 3],
+            index: 0,           // 当前轮播项索引
+            offset: 0,          // swipe组的偏移量
+            duration: 0,        // 过渡动画时长
+            itemWidth: 0,       // 轮播项宽度
+          };
+        },
+        mounted() {
+          if (this.$el) {
+            this.itemWidth = this.$el.getBoundingClientRect().width;
+          }
+          this.autoplay();
+        },
+        methods: {
+          // index 超出范围时调整
+          correctIndex() {
+            this.duration = 0;
+            const total = this.items.length;
+            if (this.index < 0) {
+              this.next(total, true);
+            } else if (this.index > total - 1) {
+              this.next(-total, true);
+            }
+          },
+          // 移动到达目标 index 途中的所有 swipe-item
+          moveItems(indexOffset) {
+            const targetIndex = this.index + indexOffset;
+            if (this.index < targetIndex) {
+              // 向左
+              for (let i = this.index; i < targetIndex; i++) {
+                this.moveItem(i + 1);
+              }
+            } else {
+              // 向右
+              for (let i = targetIndex; i < this.index; i++) {
+                this.moveItem(i);
+              }
+            }
+          },
+          // 移动 swipe-item
+          moveItem(index) {
+            const total = this.items.length;
+            const itemIndex = index % 3 < 0 ? index % 3 + 3 : index % 3;
+            // 目标 index 超出范围时调整对应 swipe-item 的偏移值
+            if (index > total - 1) {
+              this.$refs.item[itemIndex].style.transform = `translateX(${total * this.itemWidth}px)`;
+            } else if (index < 0) {
+              this.$refs.item[itemIndex].style.transform = `translateX(${-total * this.itemWidth}px)`;
+            } else {
+              this.$refs.item[itemIndex].style.transform = 'translateX(0px)';
+            }
+          },
+          resetItems() {
+            this.$refs.item.forEach($item => {
+              $item.style.transform = 'translateX(0px)';
+            });
+          },
+          // 向左/右方向切换 indexOffset 个 swipe-item
+          next(indexOffset, isCorrect) {
+            isCorrect ? this.resetItems() : this.moveItems(indexOffset);
+            this.index += indexOffset;
+            this.offset = -this.index * this.itemWidth;
+          },
+          autoplay() {
+            this.player = setInterval(() => {
+              this.duration = 0;
+              this.correctIndex();
+              // 30ms延时是为了屏蔽 reset 过程中的过渡动画
+              setTimeout(() => {
+                this.duration = 500;
+                this.next(1);
+              }, 30);
+            }, 1000);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
