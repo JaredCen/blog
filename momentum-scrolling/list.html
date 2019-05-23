@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <style>
+      body, ul {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+      li {
+        height: 40px;
+        line-height: 40px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    
+    <template id="tpl">
+      <ul>
+        <li v-for="item in list">{{item}}</li>
+      </ul>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        template: '#tpl',
+        computed: {
+          list() {
+            const list = [];
+            for (let i = 0; i < 100; i++) {
+              list.push(i);
+            }
+            return list;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
