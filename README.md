@@ -6,3 +6,4 @@
 | tail-calls | [关于 Javascript 尾调用优化的错误论证](https://www.jianshu.com/p/db220b0f4386) |
 | reverse-polish-notation | [利用栈实现四则混合运算引擎](https://www.jianshu.com/p/581713f4e6ae) |
 | swipe | [Vue 实现无缝轮播](https://www.jianshu.com/p/369652cf1102) |
+| momentum-scrolling | [物理学的 WEB 应用：模拟惯性滑动](https://www.jianshu.com/p/8015c54a1500) |
