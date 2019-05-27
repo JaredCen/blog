@@ -152,7 +152,7 @@
             // 启动惯性滑动
             if (duration < this.momentumTimeThreshold && absDeltaY > this.momentumYThreshold) {
               const momentum = this.momentum(this.offsetY, this.momentumStartY, duration);
-              this.offsetY = momentum.destination;
+              this.offsetY = Math.round(momentum.destination);
               this.duration = momentum.duration;
               this.bezier = momentum.bezier;
             }
@@ -220,7 +220,7 @@
           stop() {
             // 获取当前 translate 的位置
             const matrix = window.getComputedStyle(this.scroller).getPropertyValue('transform');
-            this.offsetY = +matrix.split(')')[0].split(', ')[5];
+            this.offsetY = Math.round(+matrix.split(')')[0].split(', ')[5]);
           },
         },
       });

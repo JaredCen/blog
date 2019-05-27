@@ -1,0 +1,182 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <style>
+      body, ul {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+      .wrapper {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        height: 80%;
+        width: 80%;
+        max-width: 300px;
+        max-height: 500px;
+        border: 1px solid #000;
+        transform: translateY(-50%);
+        overflow: hidden;
+      }
+      .list {
+        background-color: #70f3b7;
+        transition-timing-function: cubic-bezier(.165, .84, .44, 1);
+      }
+      .list-item {
+        height: 40px;
+        line-height: 40px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+  
+    <template id="tpl">
+      <div
+        class="wrapper"
+        ref="wrapper"
+        @touchstart.prevent="onStart"
+        @touchmove.prevent="onMove"
+        @touchend.prevent="onEnd"
+        @touchcancel.prevent="onEnd">
+        <ul
+          class="list"
+          ref="scroller"
+          :style="scrollerStyle">
+          <li 
+            class="list-item"
+            v-for="item in list">
+            {{item}}
+          </li>
+        </ul>
+      </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        template: '#tpl',
+        computed: {
+          list() {
+            const list = [];
+            for (let i = 0; i < 100; i++) {
+              list.push(i);
+            }
+            return list;
+          },
+          scrollerStyle() {
+            return {
+              'transform': `translate3d(0, ${this.offsetY}px, 0)`,
+              'transition-duration': `${this.duration}ms`,
+            };
+          },
+        },
+        data() {
+          return {
+            wrapper: null,
+            scroller: null,
+            minY: 0,
+            maxY: 0,
+            wrapperHeight: 0,
+            offsetY: 0,
+            duration: 0,
+            pos: {},
+            cacheOffsetY: 0,
+          };
+        },
+        mounted() {
+          this.$nextTick(() => {
+            this.wrapper = this.$refs.wrapper;
+            this.scroller = this.$refs.scroller;
+            const { height: wrapperHeight } = this.wrapper.getBoundingClientRect();
+            const { height: scrollHeight } = this.scroller.getBoundingClientRect();
+            this.wrapperHeight = wrapperHeight;
+            this.minY = wrapperHeight - scrollHeight;
+          });
+        },
+        methods: {
+          onStart(e) {
+            this.duration = 0;
+            this.stop();
+            // 是否为第一个触点，若是则需要重置 cacheOffsetY 值
+            let isFirstTouch = true;
+            Array.from(e.touches).forEach(touch => {
+              const id = touch.identifier;
+              if (!this.pos[id]) {
+                this.pos[id] = touch.pageY;
+                return;
+              }
+              isFirstTouch = false;
+            });
+            if (isFirstTouch) {
+              this.cacheOffsetY = this.offsetY;
+            }
+          },
+          onMove(e) {
+            let offset = 0;
+            Array.from(e.touches).forEach(touch => {
+              const id = touch.identifier;
+              if (this.pos[id]) {
+                offset += Math.round(touch.pageY - this.pos[id]);
+              }
+            });
+            offset = this.cacheOffsetY + offset;
+            // 超出边界时增加阻尼效果
+            if (offset < this.minY || offset > this.maxY) {
+              this.offsetY = this.damping(offset, this.wrapperHeight);
+            } else {
+              this.offsetY = offset;
+            }
+          },
+          onEnd(e) {
+            Array.from(e.changedTouches).forEach(touch => {
+              const id = touch.identifier;
+              if (this.pos[id]) {
+                this.cacheOffsetY += Math.round(touch.pageY - this.pos[id]);
+              }
+            });
+            // 当所有触点都离开平面
+            if (!e.touches.length) {
+              this.cacheOffsetY = 0;
+              this.pos = {};
+              this.resetPosition();
+            }
+          },
+          stop() {
+            // 获取当前 translate 的位置
+            const matrix = window.getComputedStyle(this.scroller).getPropertyValue('transform');
+            this.offsetY = Math.round(+matrix.split(')')[0].split(', ')[5]);
+          },
+          // 超出边界时重置位置
+          resetPosition() {
+            let offsetY;
+            if (this.offsetY < this.minY) {
+              offsetY = this.minY;
+            } else if (this.offsetY > this.maxY) {
+              offsetY = this.maxY;
+            }
+            if (typeof offsetY !== 'undefined') {
+              this.offsetY = offsetY;
+              this.duration = 500;
+            }
+          },
+          // 阻尼函数
+          damping(x, max) {
+            let y = Math.abs(x);
+            y = 0.82231 * max / (1 + 4338.47 / Math.pow(y, 1.14791));
+            return Math.round(x < 0 ? -y : y);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
