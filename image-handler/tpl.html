@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <style>
+      .image {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 350px;
+        height: 200px;
+        background-repeat: no-repeat; 
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="tpl">
+      <div class="image" style="background-image: url('<%= loading %>')"></div>
+      <img 
+        style="display: none"
+        src="<%= src %>"
+        onload="$(this).siblings('.image').css('background-image', 'url(<%= src %>)')"
+        onerror="$(this).siblings('.image').css('background-image', 'url(<%= error %>)')">
+    </template>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+    <script>
+      $(function() {
+        $('#app').append(_.template($('#tpl').html())({
+          src: './images/success.jpg',
+          error: './images/error.jpg',
+          loading: './images/loading.gif',
+        }));
+      });
+    </script>
+  </body>
+</html>

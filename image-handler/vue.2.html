@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <style>
+      .image {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 350px;
+        height: 200px;
+        background-repeat: no-repeat; 
+        background-size: cover;
+        background-position: center;
+      }
+      .image.is-loading {
+        background-size: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+  
+    <template id="tpl">
+      <div class="image" v-img="{
+        src,
+        error,
+        loading,
+      }"></div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      const ghosts = {};
+      let uuid = -1;
+
+      // 创建“替身”
+      function createGhost($el) {
+        const $img = document.createElement('img');
+        const id = ++uuid;
+        $el.setAttribute('data-id', id);
+        ghosts[id] = $img;
+        return $img;
+      }
+
+      // 清理“替身”
+      function clearGhost(id) {
+        const $img = ghosts[id];
+        if ($img) {
+          $img.onload = null;
+          $img.onerror = null;
+          ghosts[id] = null;
+        }
+      }
+
+      function resetClass($elm) {
+        removeClass($elm, 'is-loading');
+        removeClass($elm, 'is-success');
+        removeClass($elm, 'is-error');
+      }
+
+      function hasClass($elm, className) {
+        return new RegExp(`(^|\\s)${className}($|\\s)`, 'g').test($elm.className);
+      }
+
+      function addClass($elm, className) {
+        if (!hasClass($elm, className)) $elm.className += ' ' + className;
+      }
+
+      function removeClass($elm, className) {
+        if (hasClass($elm, className)) $elm.className = $elm.className.replace(new RegExp(`(^|\\s)${className}($|\\s)`, 'g'), '');
+      }
+
+      function imgHandler($img, $el, opts) {
+        resetClass($el);
+        addClass($el, 'is-loading');
+        $el.style.backgroundImage = `url('${opts.loading}')`;
+        $img.onload = () => {
+          resetClass($el);
+          addClass($el, 'is-success');
+          $el.style.backgroundImage = `url('${opts.src}')`;
+        };
+        $img.onerror = () => {
+          resetClass($el);
+          addClass($el, 'is-error');
+          $el.style.backgroundImage = `url('${opts.error}')`;
+        };
+        $img.src = opts.src;
+      }
+
+      Vue.directive('img', {
+        inserted: ($el, binding) => {
+          const $img = createGhost($el);
+          imgHandler($img, $el, binding.value);
+        },
+        update: ($el, binding) => {
+          clearGhost($el.getAttribute('data-id'));
+          const $img = createGhost($el);
+          imgHandler($img, $el, binding.value);
+        },
+        unbind: ($el) => {
+          clearGhost($el.getAttribute('data-id'));
+        },
+      });
+
+      new Vue({
+        el: '#app',
+        template: '#tpl',
+        data() {
+          return {
+            src: './images/success.jpg',
+            error: './images/error.jpg',
+            loading: './images/loading.gif',
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

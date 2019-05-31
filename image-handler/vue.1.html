@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <style>
+      .image {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 350px;
+        height: 200px;
+        background-repeat: no-repeat; 
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+  
+    <template id="tpl">
+      <div class="image" v-img="{
+        src: imgSrc,
+        error: imgErr,
+        delay: delay,
+      }"></div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      function imgHandler($el, binding) {
+        const opts = binding.value;
+        const $img = document.createElement('img');
+        $img.onload = () => {
+          $el.style.backgroundImage = `url('${opts.src}')`;
+        };
+        $img.onerror = () => {
+          $el.style.backgroundImage = `url('${opts.error}')`;
+        };
+        // $img.src = opts.src;
+        if (opts.delay) {
+          setTimeout(() => {
+            $img.src = opts.src;
+          }, opts.delay);
+        } else {
+          $img.src = opts.src;
+        } 
+      }
+
+      Vue.directive('img', {
+        inserted: imgHandler,
+        update: imgHandler,
+      });
+
+      new Vue({
+        el: '#app',
+        template: '#tpl',
+        data() {
+          return {
+            imgSrc: '',
+            imgErr: './images/error.jpg',
+            delay: 0,
+          };
+        },
+        mounted() {
+          this.delay = 200;
+          this.imgSrc = './images/success.jpg';
+          this.$nextTick(() => {
+            this.delay = 0;
+            this.imgSrc = '/images/success_2.jpg';
+          });
+        },
+      });
+    </script>
+  </body>
+</html>

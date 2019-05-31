@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <style>
+      .image {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 350px;
+        height: 200px;
+        background-repeat: no-repeat; 
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="image"></div>
+    </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script>
+      $(function() {
+        // 向 jQuery 添加 img 插件
+        $.fn.img = function(opts) {
+          const $img = document.createElement('img');
+          this.css('background-image', `url('${opts.loading}')`);
+          $img.onload = () => {
+            this.css('background-image', `url('${opts.src}')`);
+          };
+          $img.onerror = () => {
+            this.css('background-image', `url('${opts.error}')`);
+          };
+          $img.src = opts.src;
+          return this;
+        }
+
+        $('.image').img({
+          src: './images/success.jpg',
+          error: './images/error.jpg',
+          loading: './images/loading.gif',
+        });
+      });
+    </script>
+  </body>
+</html>
