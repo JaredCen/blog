@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <style>
+      /* 
+        green: #07C160
+        red: #FA5151
+        blue: #409eff
+        orange: #e6a23c
+       */
+      .wrapper {
+        margin: 0 0 30px 30px;
+      }
+      .wrapper span {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #333;
+      }
+      .wrapper span:nth-of-type(2) {
+        display: block;
+        margin: 10px 0;
+      }
+      .triangle {
+        position: relative;
+        border-width: 50px;
+        border-style: solid;
+        border-color: transparent;
+      }
+      .box {
+        width: 50px;
+        height: 50px;
+        border-width: 30px;
+        border-color: #07C160 #FA5151 #409eff #e6a23c;
+      }
+      .no-content {
+        width: 0;
+        height: 0;
+        border-color: #07C160 #FA5151 #409eff #e6a23c;
+      }
+      .no-top-border {
+        border-top-width: 0;
+      }
+      .solid {
+        width: 0;
+        height: 0;
+        border-top-width: 0;
+        border-bottom-color: #409eff;
+      }
+      .no-right {
+        width: 0;
+        height: 0;
+        border-width: 0 50px 80px 50px;
+        border-bottom-color: #409eff;
+      }
+      .hollow {
+        width: 0;
+        height: 0;
+        border-top-width: 0;
+        border-bottom-color: #409eff;
+      }
+      .hollow:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -34px;
+        left: -40px;
+        border-width: 40px;
+        border-style: solid;
+        border-color: transparent transparent #fff transparent;
+      }
+      .arrow {
+        width: 0;
+        height: 0;
+        border-top-width: 0;
+        border-bottom-color: #409eff;
+      }
+      .arrow:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -49px;
+        left: -50px;
+        border-width: 50px;
+        border-style: solid;
+        border-color: transparent transparent #fff transparent;
+      }
+      .line {
+        width: 100px;
+        height: 0;
+        border-top: 1px solid #409eff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <span>盒模型</span>
+      <div class="triangle box"></div>
+    </div>
+    <div class="wrapper">
+      <span>内容宽高为0</span>
+      <div class="triangle no-content"></div>
+    </div>
+    <div class="wrapper">
+      <span>内容宽高为0，顶部边框宽为0</span>
+      <div class="triangle no-content no-top-border"></div>
+    </div>
+    <div class="wrapper">
+      <span>实心三角形</span>
+      <div class="triangle solid"></div>
+    </div>
+    <div class="wrapper">
+      <span>非直角三角形</span>
+      <div class="triangle no-right"></div>
+    </div>
+    <div class="wrapper">
+      <span>空心三角形</span>
+      <div class="triangle hollow"></div>
+    </div>
+    <div class="wrapper">
+      <span>箭头</span>
+      <div class="triangle arrow"></div>
+      <span>1px边框</span>
+      <div class="line"></div>
+    </div>
+  </body>
+</html>

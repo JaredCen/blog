@@ -9,3 +9,4 @@
 | momentum-scrolling | [物理学的 H5 应用：模拟惯性滑动](https://github.com/JunreyCen/blog-demo/issues/7) |
 | pull-damping | [数学的 H5 应用：拖动阻尼](https://github.com/JunreyCen/blog-demo/issues/8) |
 | image-handler | [Vue 和 jQuery 的图片容错处理方案](https://github.com/JunreyCen/blog-demo/issues/9) |
+| css-triangle | [CSS 精确绘制三角形](https://github.com/JunreyCen/blog/issues/16) |

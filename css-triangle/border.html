@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <style>
+      /* 
+        green: #07C160
+        red: #FA5151
+        blue: #409eff
+        orange: #e6a23c
+       */
+      .wrapper {
+        margin: 0 0 30px 30px;
+      }
+      .wrapper span {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #333;
+      }
+      .arrow {
+        position: relative;
+        width: 50px;
+        height: 50px;
+      }
+      .arrow:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 70%;
+        height: 70%;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #409eff transparent transparent #409eff;
+        transform: rotate(45deg);
+        transform-origin: 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <span>盒模型</span>
+      <div class="arrow"></div>
+    </div>
+  </body>
+</html>
