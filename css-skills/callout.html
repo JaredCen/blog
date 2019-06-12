@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <style>
+      .prevent-user-select {
+        -webkit-user-select: none;
+        -moz-user-select: none; 
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <p>这里没有做任何处理</p>
+    <p id="no-menu">这里拦截了 contextmenu 事件</p>
+    <p style="-webkit-touch-callout: none;">这里设置了 -webkit-user-select: none;</p>
+    <p class="prevent-user-select">这里设置了 user-select: none;</p>
+    <input 
+      type="text"
+      class="prevent-user-select"
+      style="min-width: 280px;"
+      placeholder="设置了 user-select: none; 的 input 元素">
+    <p id="prevent-touch">这里拦截了 touchstart 事件</p>
+    <script>
+      const $noMenu = document.getElementById('no-menu');
+      const $preventTouch = document.getElementById('prevent-touch');
+      $noMenu.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+      });
+      $preventTouch.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+      });
+    </script>
+  </body>
+</html>

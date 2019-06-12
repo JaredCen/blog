@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <style>
+      p {
+        margin: 15px 0 5px 10px;
+        font-weight: 600;
+      }
+      .wrapper {
+        display: inline-block;
+        vertical-align: bottom;
+        margin: 10px;
+        width: 230px;
+      }
+      .object {
+        margin-top: 5px;
+        width: 200px;
+        height: 200px;
+        border: 2px solid #07C160;
+      }
+      .bg-fit {
+        background: url('./images/captain.jpeg') no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <p>使用背景图</p>
+    <div class="wrapper">
+      <span>不设置 background-size</span>
+      <div class="object bg-fit"></div>
+    </div>
+    <div class="wrapper">
+      <span>background-size: contain;</span>
+      <div class="object bg-fit" style="background-size: contain;"></div>
+    </div>
+    <div class="wrapper">
+      <span>background-size: contain;<br>background-position: center;</span>
+      <div class="object bg-fit" style="background-size: contain;background-position: center;"></div>
+    </div>
+    <div class="wrapper">
+      <span>background-size: 100% 100%;</span>
+      <div class="object bg-fit" style="background-size: 100% 100%;"></div>
+    </div>
+    <div class="wrapper">
+      <span>background-size: cover;<br>background-position: center;</span>
+      <div class="object bg-fit" style="background-size: cover;background-position: center;"></div>
+    </div>
+    <p>使用 img 标签</p>
+    <div class="wrapper">
+      <span>object-fit: none;</span>
+      <img src="./images/captain.jpeg" class="object" style="object-fit: none;">
+    </div>
+    <div class="wrapper">
+      <span>object-fit: contain;<br>object-position: 0 0;</span>
+      <img src="./images/captain.jpeg" class="object" style="object-fit: contain;object-position: 0 0;">
+    </div>
+    <div class="wrapper">
+      <span>object-fit: contain;</span>
+      <img src="./images/captain.jpeg" class="object" style="object-fit: contain;">
+    </div>
+    <div class="wrapper">
+      <span>object-fit: fill;</span>
+      <img src="./images/captain.jpeg" class="object" style="object-fit: fill;">
+    </div>
+    <div class="wrapper">
+      <span>object-fit: cover;</span>
+      <img src="./images/captain.jpeg" class="object" style="object-fit: cover;">
+    </div>
+    <div class="wrapper">
+      <span>object-fit: scale-down;</span>
+      <img src="./images/captain.jpeg" class="object" style="object-fit: scale-down;">
+    </div>
+  </body>
+</html>

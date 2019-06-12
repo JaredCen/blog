@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <style>
+      .wrapper {
+        display: inline-block;
+        vertical-align: top;
+        margin: 10px;
+        width: 20%;
+        height: 40%;
+        text-align: center;
+        border: 2px solid #07C160;
+      }
+      .wrapper > span {
+        display: block;
+        margin: 10px 0;
+      }
+      .content {
+        margin: 0 auto;
+        padding: 2px 5px;
+        box-sizing: border-box;
+        width: 50%;
+        height: 50%;
+        font-size: 14px;
+        color: #fff;
+        background-color: #FA5151;
+      }
+      .container {
+        position: relative;
+        padding: 50%;
+        width: 0;
+        height: 0;
+      }
+      .container .content {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        height: 100%;
+      }
+      .wrapper-2 {
+        display: inline-block;
+        position: relative;
+        margin: 10px;
+        width: 200px;
+        height: 300px;
+        border: 2px solid #07C160;
+      }
+      .content-2 {
+        position: relative;
+        padding: 50%;
+        width: 0;
+        height: 0;
+        background-color: #FA5151;
+      }
+      .wrapper-2 span {
+        position: absolute;
+        padding: 10px;
+        text-align: center;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <span>百分比宽高</span>
+      <div id="ctn-1" class="content"></div>
+    </div>
+    <div class="wrapper">
+      <span>利用 padding 等比缩放</span>
+      <div class="container">
+        <div id="ctn-2" class="content"></div>
+      </div>
+    </div>
+    <div class="wrapper-2">
+      <span>200 x 300</span>
+      <div class="content-2">
+        <span>200 x 200</span>
+      </div>
+    </div>
+    <script>
+      function showSize() {
+        const $ctn_1 = document.getElementById('ctn-1');
+        const $ctn_2 = document.getElementById('ctn-2');
+        $ctn_1.innerHTML = `Width: ${$ctn_1.offsetWidth}px;<br>Height: ${$ctn_1.offsetHeight}px;`;
+        $ctn_2.innerHTML = `Width: ${$ctn_2.offsetWidth}px;<br>Height: ${$ctn_2.offsetHeight}px;`;
+      }
+      showSize();
+      window.addEventListener('resize', showSize);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+<html>
+  <head>
+    <style>
+      p {
+        margin-top: 40px; 
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .group {
+        display: inline-block;
+        vertical-align: bottom;
+        margin: 0 20px;
+      }
+      .group > span {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .field {
+        position: relative;
+        width: 250px;
+        height: 50px;
+        text-align: center;
+      }
+      .field:after {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        right: -50%;
+        bottom: -50%;
+        content: '';
+        border: 1px solid #ccc;
+        transform: scale(0.5);
+      }
+      .field.is-prevent:after {
+        pointer-events: none;
+      }
+      input {
+        margin: 10px 0;
+        height: 30px;
+        width: 80%;
+      }
+      .parent {
+        width: 200px;
+        height: 200px;
+        background-color: #07C160;
+      }
+      .target {
+        width: 140px;
+        height: 140px;
+        background-color: #409eff;
+      }
+      .child {
+        width: 80px;
+        height: 80px;
+        background-color: #FA5151;
+      }
+      .parent,
+      .target,
+      .child {
+        position: relative;
+      }
+      .parent span,
+      .target span,
+      .child span {
+        font-size: 14px;
+        position: absolute;
+        top: 1px;
+        left: 4px;
+      }
+      .target,
+      .child {
+        margin: 30px;
+        display: inline-block;
+      }
+      .hover {
+        width: 150px;
+        height: 50px;
+        background-color: #07C160;
+      }
+      .hover:hover {
+        background-color: #409eff;
+      }
+    </style>
+  </head>
+  <body>
+    <p>1. 对事件传递的影响</p>
+    <div class="group">
+      <span>不作处理</span>
+      <div class="parent" onclick="alert('parent')">
+        <span>parent</span>
+        <div class="target" onclick="alert('target')">
+          <span>target</span>
+          <div class="child" onclick="alert('child')">
+            <span>child</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="group">
+      <span>target 设置 pointer-events: none;</span>
+      <div class="parent" onclick="alert('parent')">
+        <span>parent</span>
+        <div class="target" style="pointer-events: none;" onclick="alert('target')">
+          <span>target</span>
+          <div class="child" onclick="alert('child')">
+            <span>child</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>2. 点击穿透，避免同层元素的遮盖</p>
+    <div class="group">
+      <span>不作处理</span>
+      <div class="field">
+        <input type="text" placeholder="请输入">
+      </div>
+    </div>
+    <div class="group">
+      <span>:after 设置 pointer-events: none;</span>
+      <div class="field is-prevent">
+        <input type="text" placeholder="请输入">
+      </div>
+    </div>
+    <p>3. 阻止 :hover 等鼠标行为</p>
+    <div class="group">
+      <span>鼠标 hover 时变为蓝色</span>
+      <div class="hover"></div>
+    </div>
+    <div class="group">
+      <span>设置 pointer-events: none;<br>不响应 hover</span>
+      <div class="hover" style="pointer-events: none;"></div>
+    </div>
+  </body>
+</html>

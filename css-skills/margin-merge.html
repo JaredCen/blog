@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <style>
+      p {
+        margin: 20px 0 0 20px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .group, .group-2, .group-3 {
+        margin: 20px;
+        display: inline-block;
+        vertical-align: top;
+      }
+      .box {
+        width: 200px;
+        height: 100px;
+        border: 1px solid #000;
+        box-sizing: border-box;
+        font-size: 14px;
+        text-align: center;
+      }
+      span {
+        line-height: 30px;
+      }
+      .is-1 {
+        position: relative;
+      }
+      .is-1 span {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .line {
+        border: 1px solid #000;
+      }
+      .wrapper {
+        margin: 20px;
+      }
+      .box-2 {
+        margin: 10px;
+        width: 160px;
+        height: 80px;
+        border: 1px solid #000;
+        box-sizing: border-box;
+        font-size: 14px;
+        text-align: center;
+      }
+      .box-3 {
+        margin: 50px 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>1. 相邻的垂直外边距会合并</p>
+    <div class="group">
+      <span>外边距都为正数</span>
+      <div class="box is-1" style="margin-bottom: 20px;">
+        <span>margin-bottom: 20px;</span>
+      </div>
+      <div class="box is-2" style="margin-top: 10px;">
+        <span>margin-top: 10px;</span>
+      </div>
+    </div>
+    <div class="group">
+      <span>外边距一正一负</span>
+      <div class="box is-1" style="margin-bottom: 20px;">
+        <span>margin-bottom: 20px;</span>
+      </div>
+      <div class="box is-2" style="margin-top: -10px;">
+        <span>margin-top: -10px;</span>
+      </div>
+    </div>
+    <div class="group">
+      <span>外边距都为负数</span>
+      <div class="box is-1" style="margin-bottom: -20px;">
+        <span>margin-bottom: -20px;</span>
+      </div>
+      <div class="box is-2" style="margin-top: -10px;">
+        <span>margin-top: -10px;</span>
+      </div>
+    </div>
+    <p>2. 无内边距和边框的父元素的垂直外边距会与子元素的垂直外边距合并</p>
+    <div class="group-2">
+      <span>父元素 margin: 20px;</span><br><span>子元素 margin: 10px;</span>
+      <div class="line">
+        <div class="wrapper">
+          <div class="box-2"></div>
+        </div>
+      </div>
+      <span>水平外边距差为：<b class="horizontal"></b></span><br><span>垂直外边距差为：<b class="vertical"></b></span>
+    </div>
+    <p>3. 空元素的垂直外边距会合并</p>
+    <div class="group-3">
+      <span>margin: 50px 100px;</span>
+      <div class="line">
+        <div class="box-3"></div>
+      </div>
+      <span>水平外边距差为：<b class="horizontal"></b></span><br><span>垂直外边距差为：<b class="vertical"></b></span>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script>
+      $(function() {
+        const tips = '合并后的外边距为：';
+        const boxHeight = 100;
+        $('.group').each(function() {
+          const margin = $(this).children('.is-2').offset().top - $(this).children('.is-1').offset().top - boxHeight;
+          $(this).append(`<span>${tips}<b>${margin}px</b></span>`);
+        });
+
+        $('.group-2 .horizontal').html($('.group-2 .box-2').offset().left - $('.group-2 .line').offset().left - 1 + 'px');
+        $('.group-2 .vertical').html($('.group-2 .box-2').offset().top - $('.group-2 .line').offset().top - 1 + 'px');
+
+        $('.group-3 .horizontal').html($('.group-3 .line').width() + 'px');
+        $('.group-3 .vertical').html($('.group-3 .line').height() + 'px');
+      });
+    </script>
+  </body>
+</html>

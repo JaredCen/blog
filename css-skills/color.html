@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <style>
+      p {
+        color: blue;
+        max-width: 500px;
+      }
+      .column {
+        column-count: 4;
+        column-gap: 40px;
+        column-rule: 4px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <p>这里没有做任何处理</p>
+    <p style="border: 1px solid;">这里设置了 border，但不指定 border-color</p>
+    <p style="outline: 1px solid;">这里设置了 outline，但不指定 outline-color</p>
+    <p style="text-decoration: underline;">这里设置了 text-decoration，但不指定 text-decoration-color</p>
+    <p style="box-shadow: 0 1px 2px 0;">这里设置了 box-shadow，但不指定颜色</p>
+    <p style="text-shadow: 10px 10px 2px;">这里设置了 text-shadow，但不指定颜色</p>
+    <div class="column">
+      这里设置了 column-rule，但不指定 column-rule-color
+      第二列第二列第二列第二列第二列第二列第二列第二列
+    </div>
+  </body>
+</html>
