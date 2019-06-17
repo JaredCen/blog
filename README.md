@@ -1,3 +1,5 @@
+## Demo 目录和对应文章
+
 | Demo Dir | Article Link |
 |----------|--------------|
 | circular-dependency | [Commonjs、esm、Amd和Cmd的循环依赖表现和原理](https://github.com/JunreyCen/blog-demo/issues/2) |
@@ -11,3 +13,13 @@
 | image-handler | [Vue 和 jQuery 的图片容错处理方案](https://github.com/JunreyCen/blog-demo/issues/9) |
 | css-triangle | [CSS 精确绘制三角形](https://github.com/JunreyCen/blog/issues/16) |
 | css-skills | [CSS 技巧收录](https://github.com/JunreyCen/blog/issues/17) |
+
+## 其他文章
+
+- [CSS 权重详解](https://github.com/JunreyCen/blog/issues/18)
+- [Mac 设置 Git 代理](https://github.com/JunreyCen/blog/issues/15)
+- [Mac 终端设置代理](https://github.com/JunreyCen/blog/issues/14)
+- [Git 使用技巧](https://github.com/JunreyCen/blog/issues/13)
+- [JS 运算符技巧](https://github.com/JunreyCen/blog/issues/12)
+- [NaN 和 isNaN 的彩蛋](https://github.com/JunreyCen/blog/issues/11)
+- [JS 稀疏数组](https://github.com/JunreyCen/blog/issues/10)
