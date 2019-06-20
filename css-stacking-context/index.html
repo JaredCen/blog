@@ -1,0 +1,425 @@
+<html>
+  <head>
+    <style>
+    /* 层叠顺序 */
+    .wrapper-1 {
+      position: relative;
+      z-index: 1;
+      width: 450px;
+      height: 350px;
+      background-color: #fdd;
+      border: 2px solid #e6a23c;
+    }
+    .wrapper-1 > div {
+      padding: 0 5px;
+      width: 200px;
+      height: 100px;
+      box-sizing: border-box;
+      border: 1px dashed #ccc;
+    }
+    .wrapper-1 div:nth-of-type(1) {
+      position: relative;
+      z-index: -1;
+      background-color: #FEF49C;
+    }
+    .wrapper-1 div:nth-of-type(2) {
+      display: block;
+      margin: -50px 0 0 50px;
+      background-color: #ADF4FF;
+    }
+    .wrapper-1 div:nth-of-type(3) {
+      float: left;
+      margin: -50px 0 0 100px;
+      background-color: #B2FBA1;
+    }
+    .wrapper-1 div:nth-of-type(4) {
+      display: inline-block;
+      margin-left: -150px;
+      background-color: #FFC7C7;
+    }
+    .wrapper-1 div:nth-of-type(5) {
+      position: relative;
+      margin: -50px 0 0 200px;
+      background-color: #B6CAFF;
+    }
+    .wrapper-1 div:nth-of-type(6) {
+      position: absolute;
+      z-index: 1;
+      margin: -50px 0 0 250px;
+      background-color: #EEEEEE;
+    }
+
+    /* 层叠顺序图 */
+    .wrapper-1.is-map {
+      padding: 50px 0 0 50px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .wrapper-1.is-map .root {
+      position: absolute;
+      display: block;
+      top: 5px;
+      left: 10px;
+    }
+
+    /* 不关心结构关系 */
+    .wrapper-2 {
+      position: relative;
+      display: inline-block;
+      margin-right: 80px;
+    }
+    .wrapper-2 .parent-tips {
+      position: absolute;
+      top: 5px;
+      left: 10px;
+    }
+    .wrapper-2 .child-tips {
+      position: absolute;
+      top: 125px;
+      left: 210px;
+    }
+    .wrapper-2 .parent {
+      width: 200px;
+      height: 100px;
+      background-color: #fdd;
+      border: 1px dashed #ccc;
+    }
+    .wrapper-2 .child {
+      width: 200px;
+      height: 100px;
+      background-color: #B2FBA1;
+      border: 1px dashed #ccc;
+      margin: 50px 0 0 50px;
+      position: relative;
+      z-index: -1;
+    }
+
+    /* 按照 HTML 中出现的顺序 */
+    .wrapper-3 {
+      display: inline-block;
+      margin-right: 80px;
+      position: relative;
+      z-index: 1;
+    }
+    .wrapper-3 .box-1,
+    .wrapper-3 .box-2 {
+      width: 200px;
+      height: 100px;
+      border: 1px dashed #ccc;
+    }
+    .wrapper-3 .box-1 {
+      position: relative;
+      background-color: #fdd;
+    }
+    .wrapper-3 .box-2 {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      background-color: #B2FBA1;
+    }
+    .wrapper-3 .tips-1 {
+      position: absolute;
+      top: 5px;
+      left: 10px;
+    }
+    .wrapper-3 .tips-2 {
+      position: absolute;
+      width: 50px;
+      top: 125px;
+      left: 200px;
+    }
+
+    /* 自包含 */
+    .group-4 {
+      position: relative;
+      font-size: 14px;
+    }
+    .group-4 .tips-1 {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 5px;
+    }
+    .group-4 .tips-2 {
+      position: absolute;
+      z-index: 1;
+      text-align: right;
+      top: 52px;
+      left: 188px;
+    }
+    .group-4 .tips-3 {
+      position: absolute;
+      z-index: 10;
+      top: 140px;
+      left: 15px;
+    }
+    .group-4 .tips-4 {
+      position: absolute;
+      z-index: 1;
+      text-align: right;
+      top: 190px;
+      left: 175px;
+    }
+    .wrapper-4,
+    .wrapper-5 {
+      position: relative;
+      width: 200px;
+      height: 250px;
+      border: 1px dashed #ccc;
+    }
+    .wrapper-4 > div,
+    .wrapper-5 > div {
+      margin: 138px 0 0 8px;
+      width: 180px;
+      height: 100px;
+      border: 1px dashed #ccc;
+      background-color: #FEF49C;
+    }
+    .wrapper-4 {
+      z-index: 2;
+      background-color: #fdd;
+    }
+    .wrapper-4 > div {
+      position: relative;
+      z-index: -1;
+    }
+    .wrapper-5 {
+      z-index: 1;
+      margin: -200px 0 0 100px;
+      background-color: #B2FBA1;
+    }
+    .wrapper-5 > div {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* 第 6 阶 */
+    .wrapper-6 {
+      margin-right: 80px;
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+    }
+    .wrapper-6 .box-1,
+    .wrapper-6 .box-2 {
+      width: 200px;
+      height: 100px;
+      border: 1px dashed #ccc;
+    }
+    .wrapper-6 .box-1 {
+      opacity: 0.8;
+      background-color: #fdd;
+    }
+    .wrapper-6 .box-2 {
+      position: absolute;
+      background-color: #B2FBA1;
+    }
+    .wrapper-6 .tips-1 {
+      position: absolute;
+      top: 5px;
+      left: 10px;
+    }
+    .wrapper-6 .tips-2 {
+      position: absolute;
+      width: 50px;
+      top: 125px;
+      left: 200px;
+    }
+
+    /* 伸缩盒 flex 项目 */
+    .wrapper-7 {
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 20px;
+      background-color: #FEF49C;
+      border: 1px dashed #ccc;
+      width: 300px;
+      height: 200px;
+    }
+    .wrapper-7 .target {
+      margin: 35px 0 0 35px;
+      width: 200px;
+      height: 100px;
+      border: 1px dashed #ccc;
+      background-color: #fdd;
+    }
+    .wrapper-7 .child {
+      margin: 50px 0 0 50px;
+      width: 200px;
+      height: 100px;
+      border: 1px dashed #ccc;
+      background-color: #B2FBA1;
+      position: relative;
+      z-index: -1;
+    }
+    .wrapper-7 .tips-1 {
+      position: absolute;
+      top: 0;
+      left: 5px;
+    }
+    .wrapper-7 .tips-2 {
+      position: absolute;
+      top: 35px;
+      left: 40px;
+      z-index: 1;
+    }
+    .wrapper-7 .tips-3 {
+      position: absolute;
+      top: 88px;
+      left: 90px;
+      z-index: 1;
+    }
+
+    /* 固定布局的特殊性 */
+    .wrapper-8 {
+      position: relative;
+      font-size: 14px;
+    }
+    .wrapper-8 .fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #fdd;
+    }
+    .wrapper-8 .fixed,
+    .wrapper-8 .child {
+      border: 1px dashed #ccc;
+      width: 200px;
+      height: 100px;
+    }
+    .wrapper-8 .child {
+      margin: 50px 0 0 50px;
+      position: relative;
+      z-index: -1;
+      background-color: #B2FBA1;
+    }
+    .wrapper-8 .tips-1 {
+      position: absolute;
+      top: 5px;
+      left: 10px;
+    }
+    .wrapper-8 .tips-2 {
+      position: absolute;
+      top: 55px;
+      left: 60px;
+    }
+    </style>
+  </head>
+  <body>
+    
+    <p>不同层叠顺序</p>
+    <div class="wrapper-1">
+      <div>position: relative;<br>z-index: -1;</div>
+      <div>display: block;</div>
+      <div>float: left;</div>
+      <div>display: inline-block;</div>
+      <div>position: relative;</div>
+      <div>position: absolute;<br>z-index: 1;</div>
+    </div>
+
+    <p>不关心结构关系</p>
+    <div class="wrapper-2">
+      <div class="parent-tips">Parent</div>
+      <div class="child-tips">Child</div>
+      <div class="parent">
+        <div class="child"></div>
+      </div>
+    </div>
+    <div class="wrapper-2">
+      <div class="parent-tips">Parent<br>opacity: 0.6;</div>
+      <div class="child-tips">Child</div>
+      <div class="parent" style="opacity: 0.6;">
+        <div class="child"></div>
+      </div>
+    </div>
+
+    <p style="margin-top: 65px;">按照 HTML 中出现的顺序</p>
+    <div class="wrapper-3">
+      <div class="box-1"></div>
+      <div class="box-2"></div>
+      <div class="tips-1">box-1</div>
+      <div class="tips-2">box-2</div>
+    </div>
+    <div class="wrapper-3">
+      <div class="box-2"></div>
+      <div class="box-1"></div>
+      <div class="tips-1">box-1</div>
+      <div class="tips-2">box-2</div>
+    </div>
+
+    <p style="margin-top: 65px;">自包含</p>
+    <div class="group-4">
+      <div class="wrapper-4">
+        <div></div>
+      </div>
+      <div class="wrapper-5">
+        <div></div>
+      </div>
+      <div class="tips-1"><b>Parent-1</b><br>position: relative;<br>z-index: 2;</div>
+      <div class="tips-2"><b>Parent-2</b><br>position: relative;<br>z-index: 1;</div>
+      <div class="tips-3"><b>Child-1</b><br>position: relative;<br>z-index: -1;</div>
+      <div class="tips-4"><b>Child-2</b><br>position: relative;<br>z-index: 10;</div>
+    </div>
+
+    <p>7阶层叠顺序图</p>
+    <div class="wrapper-1 is-map">
+      <span class="root">background / border</span>
+      <div>z-index < 0 定位元素</div>
+      <div>display: block;</div>
+      <div>float</div>
+      <div>display: inline;<br>display: inline-block;</div>
+      <div>z-index: 0 / auto 定位元素<br>其他子级层叠上下文元素</div>
+      <div>z-index > 0 定位元素</div>
+    </div>
+
+    <p>第 6 阶层叠顺序</p>
+    <div class="wrapper-6">
+      <div class="box-1"></div>
+      <div class="box-2" style="margin: -50px 0 0 50px;"></div>
+      <div class="tips-1">box-1</div>
+      <div class="tips-2">box-2</div>
+    </div>
+    <div class="wrapper-6">
+      <div class="box-2" style="margin: 50px 0 0 50px;"></div>
+      <div class="box-1"></div>
+      <div class="tips-1">box-1</div>
+      <div class="tips-2">box-2</div>
+    </div>
+
+    <p style="margin-top: 65px;">伸缩盒 flex 项目</p>
+    <div class="wrapper-7">
+      <div class="target">
+        <div class="child"></div>
+      </div>
+      <div class="tips-1">Container</div>
+      <div class="tips-2">Item</div>
+    </div>
+    <div class="wrapper-7" style="display: inline-flex;">
+      <div class="target" style="z-index: 1;">
+        <div class="child"></div>
+      </div>
+      <div class="tips-1">Container</div>
+      <div class="tips-2">Item</div>
+      <div class="tips-3">Child</div>
+    </div>
+    <div class="wrapper-7" style="display: inline-flex;">
+      <div class="target" style="z-index: -1;">
+        <div class="child"></div>
+      </div>
+      <div class="tips-1">Container</div>
+    </div>
+
+    <p>固定布局的特殊性</p>
+    <div class="wrapper-8" style="transform: scale(1);">
+    <!-- <div class="wrapper-8" style="transform-style: preserve-3d;"> -->
+    <!-- <div class="wrapper-8" style="perspective: 100px;"> -->
+    <!-- <div class="wrapper-8" style="will-change: transform;"> -->
+      <div class="fixed">
+        <div class="child"></div>
+      </div>
+      <div class="tips-1">固定定位元素</div>
+      <div class="tips-2">负 z-index 定位元素</div>
+    </div>
+  </body>
+</html>
